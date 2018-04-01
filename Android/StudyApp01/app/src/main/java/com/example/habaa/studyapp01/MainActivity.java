@@ -9,18 +9,17 @@ import android.view.View;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    public static String dirPath = Environment.getExternalStorageDirectory().getAbsoluteFile() + "/StudyApp01";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String dirPath = Environment.getExternalStorageDirectory().getAbsoluteFile() + "/StudyApp01";
         File file = new File(dirPath);
         if(!file.exists())
             file.mkdirs();
-
-
     }
     public void onClickedWrite(View v){
         Intent intent = new Intent(this, WriteActivity.class);
