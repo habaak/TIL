@@ -1,0 +1,52 @@
+name<-c(
+  '기준년도',
+  '가입자일련번호',
+  '성별코드',
+  '연령대코드(5세단위)',
+  '시도코드','신장(5Cm단위)',
+  '체중(5Kg단위)',
+  '허리둘레',
+  '시력(좌)',
+  '시력(우)',
+  '청력(좌)',
+  '청력(우)',
+  '수축기혈압',
+  '이완기혈압',
+  '식전혈당(공복혈당)',
+  '총콜레스테롤',
+  '트리글리세라이드',
+  'HDL콜레스테롤',
+  'LDL콜레스테롤',
+  '혈색소',
+  '요단백',
+  '혈청크레아티닌',
+  '(혈청지오티)AST',
+  '(혈청지오티)ALT',
+  '감마지티피',
+  '흡연상태','음주여부','구강검진 수검여부','치아우식증유무','결손치유무','치아마모증유무','제3대구치(사랑니)이상','치석','데이터공개일자')
+
+getcsv <- function(){
+  data <- read.csv('health.csv',header = F, stringsAsFactors = F, encoding = 'UTF-8');
+  class(data)
+  return(data);
+}
+writedata <- function(df){
+  write.csv(df, file = 'healthDate.csv')
+}
+
+health <- getcsv()
+health
+colnames(health)<-name
+health$HDL콜레스테롤>
+
+health$성별코드==1&health$`신장(5Cm단위)`>=180&health$흡연상태==1&health$치석>1
+
+d1<-which(health$성별코드==1&health$`신장(5Cm단위)`>=180&health$흡연상태==1&health$치석>=1)
+d2<-which(health$성별코드==2&health$`신장(5Cm단위)`>=160&health$흡연상태==1&health$치석<1)
+d1
+d2<-which(health$성별코드==1&health$`신장(5Cm단위)`<180)
+dat1<-length(d1)
+dat2<-length(d2)
+names(dat1)="치석이 있는 180이상 흡연자(남) "
+names(dat2)="치석이 없는 180이상 흡연자(남) "
+barplot(c(dat1,dat2))

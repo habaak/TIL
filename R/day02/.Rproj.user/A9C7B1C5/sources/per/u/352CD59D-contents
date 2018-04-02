@@ -1,0 +1,52 @@
+name <- c('김지훈','이유진','박동현','김민지')
+en<- c(90,80,60,70)
+ma<-c(50,60,100,20)
+gender <-c('m','f','m','f')
+ko<-c(87,42,64,68)
+si<-c(46,98,58,95)
+addr <- c('서울','광주','대전','부산')
+student <- data.frame(name,gender,addr,ko,ma,en,si)
+score <- student[,4:7]
+score
+nameMean<-colMeans(score)
+
+subjectMean<-rowMeans(score)
+
+qplot(x=nameMean,y=subjectMean)
+
+temp <-student[,'addr']
+class(temp)
+temp2 <- as.character(temp) //문자열을 벡터로
+class(temp2)
+substr(temp2,1,2)
+
+dfm <- student[gender == 'm',]
+dff <- student[gender == 'f',]
+
+mavg <- colMeans(dfm[,c(4:7)])
+favg <- colMeans(dfm[,c(4:7)])
+qplot(y=mavg, x=names(mavg))
+
+female <- student[student$gender=='f',]
+student[student[student$gender=='f',]&student[]]
+mean(colMeans(female[,c(4:7)]))
+
+res <-rowMeans(score)
+names(res) <- student$name
+res
+
+apply(score[1],)
+female_mean <- colMeans(female[,c(4:7)])
+name(female_mean) <- colnames(student[,c(4:7)])
+
+res1 <- student[student$gender=='f',]
+r1 <- colMeans(res1[,c(4:7)])
+
+
+res2 <- student[student$gender=='m',]
+r2 <- colMeans(res2[,c(4:7)])
+
+r3<-data.frame(r1,r2)
+r4 <- as.data.frame(r3)
+
+
