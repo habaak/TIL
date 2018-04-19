@@ -1,0 +1,15 @@
+{
+  "name": "study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "atomTest.js",
+  "dependencies": {
+    "nconf": "^0.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
