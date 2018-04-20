@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="clickLoginBtn"
+            android:onClick="onClickLoginBtn"
             android:text="login" />
 
         <Space

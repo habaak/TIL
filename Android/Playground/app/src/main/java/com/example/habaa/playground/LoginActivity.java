@@ -1,5 +1,6 @@
 package com.example.habaa.playground;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,17 +10,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by habaa on 2018-04-19.
@@ -29,7 +36,8 @@ import java.util.ArrayList;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText etEmail, etPwd;
-    LoginTask loginTask;
+    LoginRequest loginRequest;
+    String loginCkeck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,67 +47,77 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.email);
         etPwd = findViewById(R.id.pwd);
         btnLogin = findViewById(R.id.login);
-        System.out.print("startLogin");
     }
-    public void clickLoginBtn(View v){
+    public void onClickLoginBtn(View v){
         String email = etEmail.getText().toString().trim();
         String pwd = etPwd.getText().toString().trim();
-        loginTask = new LoginTask();
-        loginTask.execute(email,pwd);
+
+        loginRequest = (LoginRequest) new LoginRequest().execute("http://70.12.114.137/playground/login.do",email,pwd);
     }
-    class LoginTask extends AsyncTask<String,String,String>{
-        String url = "http://192.168.1.170/playground/login.do";
-        HttpClient http = new DefaultHttpClient();
-        ArrayList post = new ArrayList<>();// NameValuePair 변수명과 값을 함께 저장하는 객체
-        //post 방식으로 전달할 값들
-        HttpPost httpPost = new HttpPost(url);
+
+    public class LoginRequest extends AsyncTask<String, Void, String>{
 
         @Override
         protected String doInBackground(String... strings) {
-            String email = strings[0];
-            String pwd = strings[1];
-
-            try{
-                post.add(new BasicNameValuePair("email",email));
-                post.add(new BasicNameValuePair("pwd",pwd));
-                //url encoding이 필요한 값들(한글, 특수문자)
-                UrlEncodedFormEntity request = new UrlEncodedFormEntity(post,"euc-kr");
-                //HttpPost httpPost = new HttpPost(url);
-                //post 방식으로 전달할 데이터 설정
-                httpPost.setEntity(request);
-               /* //post 방식으로 전송, 응답결과는 response로
-                HttpResponse response=http.execute(httpPost);
-
-                //response text를 스트링으로 변환
-                String body= EntityUtils.toString(response.getEntity());
-                // 스트링을 json으로
-                JSONObject obj=new JSONObject(body);
-                final String message= obj.getString("message");*/
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-
+            signUp(strings[0],strings[1],strings[2]);
             return null;
         }
+
         @Override
         protected void onPostExecute(String s) {
-            //post 방식으로 전송, 응답결과는 response로
-            HttpResponse response= null;
-            try {
-                response = http.execute(httpPost);
-                //response text를 스트링으로 변환
-                String body= EntityUtils.toString(response.getEntity());
-                // 스트링을 json으로
-                JSONObject obj=new JSONObject(body);
-                final String message= obj.getString("message");
+            super.onPostExecute(s);
+            System.out.println("loginCkeck -- "+loginCkeck);
+            if(loginCkeck.equals("false")) {
+                Toast.makeText(LoginActivity.this,"아이디 비밀번호를 다시 한 번 확인해주세요",Toast.LENGTH_LONG).show();
+            } else if(loginCkeck.equals("true")){
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
 
-                Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
+        }
+        JSONObject jsonDataObject = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
+        String res;
+        private void signUp(String url, String email, String pwd) {
+            try {
+                jsonDataObject.put("email",email);
+                jsonDataObject.put("pwd",pwd);
+
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(url);
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("email", email));
+                nameValuePairs.add(new BasicNameValuePair("pwd", pwd));
+                nameValuePairs.add(new BasicNameValuePair(HTTP.CONTENT_TYPE,"application/json"));
+
+                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                //----------------------------------------------------
+                HttpResponse response = client.execute(post);
+                System.out.println("Response -- -"+response);
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    System.out.println("Buffered rd -- "+line);
+
+                    JSONArray jsonArray = new JSONArray(line);
+
+
+                    System.out.println("JSONArray -- "+jsonArray);
+
+                    for(int i = 0 ; i < jsonArray.length(); i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String isSuccess = jsonObject.getString("LoginSucess");
+                        System.out.println(isSuccess+ " - Login - "+isSuccess);
+                        loginCkeck=isSuccess;
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
         }
     }
 }

@@ -88,6 +88,7 @@
                 android:layout_weight="3"
                 android:background="#fff"
                 android:elevation="1dp"
+                android:onClick="clickNextBtn"
                 android:text="다음"
                 android:textColor="#18c" />
 
@@ -181,12 +182,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btGoLogin2"
+                android:id="@+id/btnNext2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="#fff"
                 android:elevation="1dp"
+                android:onClick="clickNextBtn"
                 android:text="다음"
                 android:textColor="#18c" />
 
@@ -204,7 +206,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/viewNamePwd"
+        android:id="@+id/viewAgeGender"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -226,11 +228,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <Spinner
-                android:id="@+id/ageSpinner"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/etAge"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="나이"
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -250,19 +255,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="남성" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="여성" />
+                android:entries="@array/gender"/>
 
             <Space
                 android:layout_width="wrap_content"
@@ -282,12 +280,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btGoLogin3"
+                android:id="@+id/btnNext3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="#fff"
                 android:elevation="1dp"
+                android:onClick="clickNextBtn"
                 android:text="다음"
                 android:textColor="#18c" />
 
@@ -332,6 +331,7 @@
             android:layout_below="@+id/id"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
+            android:onClick="clickNextBtn"
             android:text="다음" />
     </RelativeLayout>
 
