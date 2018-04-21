@@ -5,23 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.habaa.playground.MainActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="85dp" />
+    tools:context="com.example.habaa.cameratest.MainActivity">
 
     <Button
-        android:id="@+id/btnGoPostContent"
+        android:id="@+id/btnCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="clickGoPostContent"
-        android:text="게시글 올리기 이동" />
+        android:onClick="clickBtnCamera"
+        android:text="camera" />
 
-
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 </LinearLayout>

@@ -52,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String pwd = etPwd.getText().toString().trim();
 
-        loginRequest = (LoginRequest) new LoginRequest().execute("http://70.12.114.137/playground/login.do",email,pwd);
+        loginRequest = (LoginRequest) new LoginRequest().execute("http://172.30.1.8/playground/login.do",email,pwd);
+
     }
 
     public class LoginRequest extends AsyncTask<String, Void, String>{
@@ -116,8 +117,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 }

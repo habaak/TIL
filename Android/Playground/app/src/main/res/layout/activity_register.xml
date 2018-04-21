@@ -55,6 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+
+
             <EditText
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
@@ -62,7 +64,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="이메일"
-                android:inputType="textPersonName" />
+                android:inputType="textEmailAddress" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -155,6 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+
             <EditText
                 android:id="@+id/pwd"
                 android:layout_width="wrap_content"
@@ -162,7 +165,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="비밀번호"
-                android:inputType="textPersonName" />
+                android:inputType="textPassword" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -228,6 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+
             <EditText
                 android:id="@+id/etAge"
                 android:layout_width="wrap_content"
@@ -235,7 +239,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="나이"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -247,20 +251,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:gravity="center">
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <Spinner
-                android:id="@+id/genderSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/gender"/>
+            <RadioGroup
+                android:id="@+id/genderRG"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="남성" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여성" />
+
+
+                출처: http://bitsoul.tistory.com/47 [Happy Programmer~]
+            </RadioGroup>
 
             <Space
                 android:layout_width="wrap_content"
