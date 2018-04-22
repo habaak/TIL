@@ -13,7 +13,7 @@ public class StartActivity extends AppCompatActivity {
     private WebView startView;
     private Handler handler = new Handler();
     Button reg,login;
-    public static String serverUrl = "http://172.30.1.8/playground";
+    public static String serverUrl = "http://192.168.1.170/playground";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

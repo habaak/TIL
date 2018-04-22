@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String pwd = etPwd.getText().toString().trim();
 
-        loginRequest = (LoginRequest) new LoginRequest().execute("http://172.30.1.8/playground/login.do",email,pwd);
+        loginRequest = (LoginRequest) new LoginRequest().execute(StartActivity.serverUrl+"/login.do",email,pwd);
 
     }
 
@@ -76,13 +76,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
-        JSONObject jsonDataObject = new JSONObject();
+        //JSONObject jsonDataObject = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         String res;
         private void signUp(String url, String email, String pwd) {
             try {
-                jsonDataObject.put("email",email);
-                jsonDataObject.put("pwd",pwd);
+                /*jsonDataObject.put("email",email);
+                jsonDataObject.put("pwd",pwd);*/
 
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(url);
