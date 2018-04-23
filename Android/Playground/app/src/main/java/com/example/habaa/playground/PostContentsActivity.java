@@ -1,6 +1,7 @@
 package com.example.habaa.playground;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -76,6 +77,8 @@ public class PostContentsActivity extends AppCompatActivity {
     PostPicRequest postPicRequest;
     String registerContentsSucess;
     EditText etComment;
+
+    String loginUidx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,9 @@ public class PostContentsActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         btnPostPic = findViewById(R.id.btnPostPic);
         etComment = findViewById(R.id.etComment);
+
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        int loginUidx = pref.getInt("uidx", 0);
     }
     public void clickStartCamera(View v){
         sendTakePhotoIntent();
@@ -137,7 +143,7 @@ public class PostContentsActivity extends AppCompatActivity {
                 builder.addTextBody("cmt",comment,ContentType.create("Multipart/related", "UTF-8"));
                 builder.addTextBody("lat","37",ContentType.create("Multipart/related", "UTF-8"));
                 builder.addTextBody("lon","127",ContentType.create("Multipart/related", "UTF-8"));
-                builder.addTextBody("uidx","1",ContentType.create("Multipart/related", "UTF-8"));
+                builder.addTextBody("uidx",loginUidx,ContentType.create("Multipart/related", "UTF-8"));
 
                 //MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
                 //reqEntity.addPart("img", bin);

@@ -1,9 +1,16 @@
 package com.example.habaa.playground;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     EditText etEmail, etPwd;
     LoginRequest loginRequest;
-    String loginCkeck;
+    String lat,lon;
+
+    public static String loginCkeck,spuidx,spname,spemail,sppwd,spage,spgender;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +57,19 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.email);
         etPwd = findViewById(R.id.pwd);
         btnLogin = findViewById(R.id.login);
+
+
     }
     public void onClickLoginBtn(View v){
         String email = etEmail.getText().toString().trim();
         String pwd = etPwd.getText().toString().trim();
 
+
+
         loginRequest = (LoginRequest) new LoginRequest().execute(StartActivity.serverUrl+"/login.do",email,pwd);
 
     }
-
+//============Login Network=================
     public class LoginRequest extends AsyncTask<String, Void, String>{
 
         @Override
@@ -67,11 +81,27 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+
+
+
             System.out.println("loginCkeck -- "+loginCkeck);
             if(loginCkeck.equals("false")) {
                 Toast.makeText(LoginActivity.this,"아이디 비밀번호를 다시 한 번 확인해주세요",Toast.LENGTH_LONG).show();
             } else if(loginCkeck.equals("true")){
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                Log.d("Login success" ,"id : "+spemail +" / uid : "+spuidx);
+
+                SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);//SharedPreferences객체 생성
+                SharedPreferences.Editor editor = pref.edit();//데이터 저장을 위한 Editor 객체
+
+                editor.putString("uidx",spuidx);
+                editor.putString("pwd",sppwd);
+                editor.putString("name",spname);
+                editor.putString("age",spage);
+                editor.putString("gender",spgender);
+                editor.putBoolean("loginChecker",true);
+                editor.commit();
+                Intent intent = new Intent(LoginActivity.this,MainFrameActivity.class);
                 startActivity(intent);
             }
 
@@ -79,17 +109,31 @@ public class LoginActivity extends AppCompatActivity {
         //JSONObject jsonDataObject = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         String res;
+        @SuppressLint("MissingPermission")
         private void signUp(String url, String email, String pwd) {
             try {
                 /*jsonDataObject.put("email",email);
                 jsonDataObject.put("pwd",pwd);*/
 
+                final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        100,
+                        1, mLocationListener);
+                lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, // 등록할 위치제공자
+                        100, // 통지사이의 최소 시간간격 (miliSecond)
+                        1, // 통지사이의 최소 변경거리 (m)
+                        mLocationListener);
+
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(url);
+
+
 
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
                 nameValuePairs.add(new BasicNameValuePair("email", email));
                 nameValuePairs.add(new BasicNameValuePair("pwd", pwd));
+                nameValuePairs.add(new BasicNameValuePair("lat", lat));
+                nameValuePairs.add(new BasicNameValuePair("lon", lon));
                 nameValuePairs.add(new BasicNameValuePair(HTTP.CONTENT_TYPE,"application/json"));
 
                 post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -110,6 +154,12 @@ public class LoginActivity extends AppCompatActivity {
                     for(int i = 0 ; i < jsonArray.length(); i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String isSuccess = jsonObject.getString("LoginSucess");
+                        spuidx = jsonObject.getString("uidx");
+                        spemail = jsonObject.getString("email");
+                        spname = jsonObject.getString("name");
+                        sppwd = jsonObject.getString("pwd");
+                        spage = jsonObject.getString("age");
+                        spgender = jsonObject.getString("gender");
                         System.out.println(isSuccess+ " - Login - "+isSuccess);
                         loginCkeck=isSuccess;
                     }
@@ -119,5 +169,31 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+//============Location=============
+    private final LocationListener mLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+
+
+            Log.d("LOCATION", "onLocationChanged, location:" + location);
+            lat = String.valueOf(location.getLongitude()); //경도
+            lon = String.valueOf(location.getLatitude());   //위도
+            //double altitude = location.getAltitude();   //고도
+            //float accuracy = location.getAccuracy();    //정확도
+        }
+        public void onProviderDisabled(String provider) {
+            // Disabled
+            Log.d("test", "onProviderDisabled, provider:" + provider);
+        }
+
+        public void onProviderEnabled(String provider) {
+            // Enabled
+            Log.d("test", "onProviderEnabled, provider:" + provider);
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            // 변경
+            Log.d("test", "onStatusChanged, provider:" + provider + ", status:" + status + " ,Bundle:" + extras);
+        }
+    };
 }
 

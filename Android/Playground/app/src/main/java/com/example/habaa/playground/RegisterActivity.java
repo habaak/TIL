@@ -1,6 +1,7 @@
 package com.example.habaa.playground;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     RadioGroup rgGender;
     AsyncTask<String, Void, String> regsterRequest;
     String registerCheck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +72,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         view2.setVisibility(View.INVISIBLE);
         view3.setVisibility(View.INVISIBLE);
         view4.setVisibility(View.INVISIBLE);
-
-
     }
     public void clickNextBtn(View v){
             String email ="",name="",pwd="",age="",gender ="";
@@ -132,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             if(registerCheck.equals("false")) {
                 Toast.makeText(RegisterActivity.this,"회원 가입이 실패 했습니다.",Toast.LENGTH_LONG).show();
             } else if(registerCheck.equals("true")){
-                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this,MainFrameActivity.class);
                 startActivity(intent);
             }
         }

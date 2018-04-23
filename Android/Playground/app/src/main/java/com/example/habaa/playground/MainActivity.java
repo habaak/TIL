@@ -1,10 +1,17 @@
 package com.example.habaa.playground;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Entity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,16 +37,45 @@ public class MainActivity extends AppCompatActivity {
     MainRequest mainRequest;
     String json;
 
+
+
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//===============================SharedPreferences
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String uidx = getResources().getString(Integer.parseInt("uidx"));
+
         tv = findViewById(R.id.textView);
-        mainRequest = (MainRequest) new MainRequest().execute(StartActivity.serverUrl+"/mainView.do","37.505258","127.0287443","1");
+        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                100,
+                1, mLocationListener);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, // 등록할 위치제공자
+                100, // 통지사이의 최소 시간간격 (miliSecond)
+                1, // 통지사이의 최소 변경거리 (m)
+                mLocationListener);
+        mainRequest = (MainRequest) new MainRequest().execute(StartActivity.serverUrl+"/mainView.do",lat,lon,uidx);
     }
+
+    //사진올리기
     public void clickGoPostContent(View v){
         Intent intent = new Intent(MainActivity.this,PostContentsActivity.class);
+        startActivity(intent);
+    }
+    //로그아웃
+    public void clickLogOut(View v){
+
+        SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove("loginCheck");
+        editor.commit();
+
+        Intent intent = new Intent(MainActivity.this,StartActivity.class);
         startActivity(intent);
     }
     public void onClickShowJson(View v){
@@ -85,4 +121,31 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    //======================Lat lon 검색========================
+    private final LocationListener mLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+
+
+            Log.d("LOCATION", "onLocationChanged, location:" + location);
+            lat = String.valueOf(location.getLongitude()); //경도
+            lon = String.valueOf(location.getLatitude());   //위도
+            //double altitude = location.getAltitude();   //고도
+            //float accuracy = location.getAccuracy();    //정확도
+        }
+        public void onProviderDisabled(String provider) {
+            // Disabled
+            Log.d("test", "onProviderDisabled, provider:" + provider);
+        }
+
+        public void onProviderEnabled(String provider) {
+            // Enabled
+            Log.d("test", "onProviderEnabled, provider:" + provider);
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            // 변경
+            Log.d("test", "onStatusChanged, provider:" + provider + ", status:" + status + " ,Bundle:" + extras);
+        }
+    };
 }

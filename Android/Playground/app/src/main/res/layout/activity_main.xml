@@ -22,6 +22,12 @@
         android:onClick="clickGoPostContent"
         android:text="게시글 올리기 이동" />
 
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="clickLogOut"
+        android:text="로그아웃" />
 
 
 </LinearLayout>
