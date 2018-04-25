@@ -1,33 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.habaa.playground.MainActivity">
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="69dp"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/ibtnChangeGPS"
+        app:srcCompat="@drawable/pro6" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="85dp" />
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/main_background"
+        android:gravity="center"
+        android:text="gardener1234" />
 
-    <Button
-        android:id="@+id/btnGoPostContent"
+
+    <ImageButton
+        android:id="@+id/ibtnChangeGPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txGPS"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="18dp"
+        android:background="@android:color/background_light"
+        app:srcCompat="@drawable/cgps" />
+
+    <LinearLayout
+        android:id="@+id/ViewContents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickGoPostContent"
-        android:text="게시글 올리기 이동" />
+        android:layout_height="405dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="106dp"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/progressbar"
+            />
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+        <!--<LinearLayout
+            android:id="@+id/ViewComment"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnLogOut"
+            &lt;!&ndash;<TextView
+                android:id="@+id/tvMyComment"
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="♥♥♥♥♥♥♥♥♥♥♥♥♥" />
+
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="@android:color/background_light"
+                app:srcCompat="@drawable/point" />&ndash;&gt;
+            &lt;!&ndash;ListView 끝에서 다음 데이터 로딩중에 보여줄 프로그레스바&ndash;&gt;
+
+
+            &lt;!&ndash;ListView를 정의한다.&ndash;&gt;
+
+        </LinearLayout>-->
+
+        <!--<ImageView
+            android:id="@+id/ivPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="104dp"
+            app:srcCompat="@drawable/img2" />-->
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/txGPS"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="My location is SamSung-dong, Posco Center" />
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clickLogOut"
-        android:text="로그아웃" />
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/ibtnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            app:srcCompat="@drawable/ballturn" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/ibtnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickGoPostContent"
+            app:srcCompat="@drawable/photo" />
+
+        <ImageButton
+            android:id="@+id/ibtnMyPage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            app:srcCompat="@drawable/mypage2" />
+
+        <ImageButton
+            android:id="@+id/ibtnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickLogOut"
+            app:srcCompat="@drawable/like" />
+    </LinearLayout>
+
+</RelativeLayout>

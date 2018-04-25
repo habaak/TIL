@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -74,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         view4.setVisibility(View.INVISIBLE);
     }
     public void clickNextBtn(View v){
-            String email ="",name="",pwd="",age="",gender ="";
+        String email ="",name="",pwd="",age="",gender ="";
         if(v.getId()==R.id.btnNext){
             view1.setVisibility(View.INVISIBLE);
             view2.setVisibility(View.VISIBLE);
@@ -93,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             view3.setVisibility(View.INVISIBLE);
             view4.setVisibility(View.VISIBLE);
         }else if(v.getId()==R.id.btnGoMain){
+            id.setText((CharSequence) etNickName);
             email = etEmail.getText().toString().trim();
 
             name = etNickName.getText().toString().trim();
@@ -132,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             if(registerCheck.equals("false")) {
                 Toast.makeText(RegisterActivity.this,"회원 가입이 실패 했습니다.",Toast.LENGTH_LONG).show();
             } else if(registerCheck.equals("true")){
-                Intent intent = new Intent(RegisterActivity.this,MainFrameActivity.class);
+                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         }

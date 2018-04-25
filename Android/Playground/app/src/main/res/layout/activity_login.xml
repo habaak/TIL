@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/main_background"
     tools:context="com.example.habaa.playground.LoginActivity">
 
 
@@ -26,11 +27,11 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:src="@drawable/logo1pink" />
 
         <Space
             android:layout_width="wrap_content"
@@ -107,6 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:onClick="onClickLoginBtn"
             android:text="login" />
 

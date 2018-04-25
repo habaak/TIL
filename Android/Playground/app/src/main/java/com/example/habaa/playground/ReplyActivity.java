@@ -157,6 +157,4 @@ public class ReplyActivity extends AppCompatActivity {
         }
 
     }
-
-
 }

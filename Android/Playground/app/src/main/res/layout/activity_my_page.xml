@@ -1,48 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@android:color/background_light">
 
-    <LinearLayout
-        android:layout_width="385dp"
+    <TextView
+        android:id="@+id/myid"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-92dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:background="@android:color/holo_blue_dark"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="fill_vertical|center"
-            android:text="myid" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="90dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="35dp"
-        app:srcCompat="@drawable/tester" />
+        android:background="@drawable/main_background"
+        android:gravity="center"
+        android:text="gardener1234" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginTop="52dp"
         android:text="Post"
         android:textAlignment="center"
         android:textStyle="bold" />
@@ -53,52 +33,115 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/textView2"
-        android:layout_marginEnd="149dp"
-        android:text="TextView" />
+        android:layout_marginEnd="134dp"
+        android:text="09" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="44dp"
+        app:srcCompat="@drawable/person2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mod_bt"
+        android:layout_alignStart="@+id/imageView6"
+        android:text="gardener1234" />
 
     <Button
         android:id="@+id/mod_bt"
-        android:layout_width="131dp"
-        android:layout_height="34dp"
-        android:layout_alignEnd="@+id/textView3"
-        android:layout_below="@+id/textView2"
+        android:layout_width="273dp"
+        android:layout_height="37dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="113dp"
+        android:backgroundTint="@drawable/up"
         android:onClick="clickbt"
         android:text="Modify"
         android:textSize="10sp" />
 
-    <Button
-        android:id="@+id/set_bt"
-        android:layout_width="131dp"
-        android:layout_height="34dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView2"
-        android:layout_marginEnd="11dp"
-        android:onClick="clickbt"
-        android:text="setting" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="322dp"
+        android:layout_height="360dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="45dp"
         android:background="@android:color/background_light"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="312dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="0dp"
             app:srcCompat="@drawable/imgg" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/set_bt"
+        android:layout_width="275dp"
+        android:layout_height="37dp"
+        android:layout_alignStart="@+id/mod_bt"
+        android:layout_below="@+id/textView2"
+        android:layout_marginBottom="-3dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="-2dp"
+        android:backgroundTint="@drawable/up"
+        android:text="setting"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginStart="25dp"
-        android:text="message" />
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/homebt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickMyPage"
+            app:srcCompat="@drawable/ballturn" />
+
+        <ImageButton
+            android:id="@+id/upbt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickGoPostContent"
+            app:srcCompat="@drawable/photo" />
+
+        <ImageButton
+            android:id="@+id/mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickMyPage"
+            app:srcCompat="@drawable/mypage2" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:onClick="clickLogOut"
+            app:srcCompat="@drawable/off" />
+
+    </LinearLayout>
 
 </RelativeLayout>

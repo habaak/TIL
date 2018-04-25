@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     android:orientation="vertical"
+    android:background="@drawable/main_background"
     tools:context="com.example.habaa.playground.LoginActivity">
 
 
@@ -27,11 +27,11 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:src="@drawable/logo1pink" />
 
         <Space
             android:layout_width="wrap_content"
@@ -56,9 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:background="@android:color/background_light"
             android:elevation="1dp"
             android:onClick="clickBt"
-            android:text="새 계정 만들기" />
+            android:text="새 계정 만들기"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored" />
 
         <Space
             android:layout_width="wrap_content"
@@ -81,6 +83,7 @@
             android:id="@+id/btnGoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:layout_weight="3"
             android:background="#fff"
             android:elevation="0dp"

@@ -1,5 +1,6 @@
 package com.example.habaa.playground;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -7,6 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -71,8 +75,11 @@ public class PostContentsActivity extends AppCompatActivity {
     private String imageFilePath,comment;
     private Uri photoUri;
     File pic;
+    LocationManager manager;
+    GPSListener gpsListener;
+    String lat,lon;
 
-    Button btnPostPic;
+    Button btnPostPic,btnStartCamera;
     ImageView imageView;
     PostPicRequest postPicRequest;
     String registerContentsSucess;
@@ -84,12 +91,51 @@ public class PostContentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_contents);
         imageView = findViewById(R.id.imageView);
-        btnPostPic = findViewById(R.id.btnPostPic);
+        btnPostPic = (Button) findViewById(R.id.btnPostPic);
+        //btnStartCamera = (Button) findViewById(R.id.btnStartCamera);
         etComment = findViewById(R.id.etComment);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        int loginUidx = pref.getInt("uidx", 0);
+        loginUidx = pref.getString("uidx", LoginActivity.spuidx);
+        Log.d("*****LOG*****",loginUidx);
+        sendTakePhotoIntent();
+        startLocationService();
+
     }
+    //메인페이지
+    public void clickMainPage(View v){
+        Intent intent = new Intent(PostContentsActivity.this,MainActivity.class);
+        startActivity(intent);
+    }
+    //사진올리기
+    public void clickGoPostContent(View v){
+        Intent intent = new Intent(PostContentsActivity.this,PostContentsActivity.class);
+        startActivity(intent);
+    }
+    //마이페이지
+    public void clickMyPage(View v){
+        Intent intent = new Intent(PostContentsActivity.this,MyPageActivity.class);
+        startActivity(intent);
+    }
+    //로그아웃
+    public void clickLogOut(View v){
+
+        SharedPreferences pref = getSharedPreferences("pref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.remove("uidx");
+        editor.remove("pwd");
+        editor.remove("name");
+        editor.remove("age");
+        editor.remove("gender");
+        editor.remove("loginChecker");
+        editor.commit();
+
+        Intent intent = new Intent(PostContentsActivity.this,StartActivity.class);
+        startActivity(intent);
+    }
+
+
     public void clickStartCamera(View v){
         sendTakePhotoIntent();
     }
@@ -100,6 +146,7 @@ public class PostContentsActivity extends AppCompatActivity {
         System.out.println("PIC -- "+ pic);
         postPicRequest = (PostPicRequest) new PostPicRequest().execute(StartActivity.serverUrl+"/registerContents.do",comment);
     }
+
     //============================통신 부분=======================
     public class PostPicRequest extends AsyncTask<String, Void, String>{
 
@@ -115,6 +162,7 @@ public class PostContentsActivity extends AppCompatActivity {
             if(registerContentsSucess.equals("false")) {
                 Toast.makeText(PostContentsActivity.this,"fail",Toast.LENGTH_LONG).show();
             } else if(registerContentsSucess.equals("true")){
+                startLocationService();
                 Intent intent = new Intent(PostContentsActivity.this,MainActivity.class);
                 startActivity(intent);
             }
@@ -129,11 +177,11 @@ public class PostContentsActivity extends AppCompatActivity {
                 jsonDataObject.put("img",pic);
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(url);
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                /*List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
                 nameValuePairs.add(new BasicNameValuePair("cmt", comment));
                 nameValuePairs.add(new BasicNameValuePair("lat", "37"));
                 nameValuePairs.add(new BasicNameValuePair("lon", "127"));
-                nameValuePairs.add(new BasicNameValuePair("uidx", "1"));
+                nameValuePairs.add(new BasicNameValuePair("uidx", "1"));*/
 
 
                 FileBody bin = new FileBody(pic);
@@ -141,8 +189,9 @@ public class PostContentsActivity extends AppCompatActivity {
                 builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
                 builder.addPart("img", bin);
                 builder.addTextBody("cmt",comment,ContentType.create("Multipart/related", "UTF-8"));
-                builder.addTextBody("lat","37",ContentType.create("Multipart/related", "UTF-8"));
-                builder.addTextBody("lon","127",ContentType.create("Multipart/related", "UTF-8"));
+                builder.addTextBody("lat",lat,ContentType.create("Multipart/related", "UTF-8"));
+                builder.addTextBody("lon",lon,ContentType.create("Multipart/related", "UTF-8"));
+                //Log.d("test**************",loginUidx);
                 builder.addTextBody("uidx",loginUidx,ContentType.create("Multipart/related", "UTF-8"));
 
                 //MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -151,7 +200,6 @@ public class PostContentsActivity extends AppCompatActivity {
                 post.setEntity(builder.build());
                 HttpResponse response = client.execute(post);
                 HttpEntity entity = response.getEntity();
-                inputStream = entity.getContent();
 
                 BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
                 String line = "";
@@ -304,5 +352,44 @@ public class PostContentsActivity extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+    //GPS=============================================
+    private void startLocationService() {
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        gpsListener = new GPSListener();
+        long minTime = 1000;
+        float minDistance = 0;
+        try {
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistance, gpsListener);
+            Location lastLocation = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastLocation != null) {
+                Double latitude = lastLocation.getLatitude();
+                Double longitude = lastLocation.getLongitude();
+                //textView.setText("내 위치 : " + latitude + ", " + longitude);
+            }
+
+        } catch (SecurityException ex) {
+            ex.printStackTrace();
+        }
+    }
+    private class GPSListener implements LocationListener {
+        public void onLocationChanged(Location location) {
+            lat = String.valueOf(location.getLatitude());
+            lon = String.valueOf(location.getLongitude());
+            String msg = "Latitude : "+ lat + "\nLongitude:"+ lon; Log.i("GPSListener", msg);
+            //textView.setText("내 위치는 : " + latitude + ", " + longitude);
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
+            manager.removeUpdates(gpsListener);
+
+        }
+        public void onProviderDisabled(String provider) {
+
+        } public void onProviderEnabled(String provider) {
+
+        } public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
     }
 }

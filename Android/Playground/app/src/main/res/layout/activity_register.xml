@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.habaa.playground.LoginActivity">
+    android:background="@drawable/main_background"
+    tools:context="com.example.habaa.playground.RegisterActivity">
 
     <LinearLayout
         android:id="@+id/viewInputEmail"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/logo1pink" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -277,7 +278,6 @@
                     android:text="여성" />
 
 
-                출처: http://bitsoul.tistory.com/47 [Happy Programmer~]
             </RadioGroup>
 
             <Space

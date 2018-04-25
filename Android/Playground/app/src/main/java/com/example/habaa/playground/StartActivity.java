@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,25 +16,22 @@ public class StartActivity extends AppCompatActivity {
     private WebView startView;
     private Handler handler = new Handler();
     Button reg,login;
-    public static String serverUrl = "http://70.12.114.137/playground";
-
+    public static String serverUrl = "http://192.168.0.45/playground";
+    boolean loginChecker= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        Boolean loginChecker = getResources().getBoolean(Integer.parseInt("loginChecker"));
-        //loginChecker = pref.getBoolean();
-        if(loginChecker){
-            Intent intent=new Intent(StartActivity.this, MainFrameActivity.class);
-            startActivity(intent);
-        }else {
+        if(!loginChecker){
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_start);
 
             reg = findViewById(R.id.btnGoReg);
             login = findViewById(R.id.btnGoLogin);
+        }else {
+            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     }
     public void clickBt(View v){
