@@ -177,11 +177,6 @@ public class PostContentsActivity extends AppCompatActivity {
                 jsonDataObject.put("img",pic);
                 HttpClient client = new DefaultHttpClient();
                 HttpPost post = new HttpPost(url);
-                /*List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("cmt", comment));
-                nameValuePairs.add(new BasicNameValuePair("lat", "37"));
-                nameValuePairs.add(new BasicNameValuePair("lon", "127"));
-                nameValuePairs.add(new BasicNameValuePair("uidx", "1"));*/
 
 
                 FileBody bin = new FileBody(pic);
