@@ -21,12 +21,11 @@ public class http4 {
 			ContentBody file0 = new FileBody(f0, ContentType.create("application/octet-stream"),URLEncoder.encode(f0.getName(), DEFAULT_ENCODING));
 
 			File f1 = new File("d:/temp/temp1.png");
-
+/*
 			ContentBody file1 = new FileBody(f1, ContentType.create("application/octet-stream"),URLEncoder.encode(f1.getName(), DEFAULT_ENCODING));
-
 			ContentBody comment = new StringBody("{}", ContentType.APPLICATION_JSON);
 
-			MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+*/			MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
 			multipartEntityBuilder.addPart("file0", file0);
 			//multipartEntityBuilder.addPart("file1", file1);
 			multipartEntityBuilder.addPart("name", comment);
