@@ -13,39 +13,50 @@ import java.net.Socket;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 public class Server {
-
-	private int port;
-	private boolean flag;
+	private int port=7788;
+	private boolean flag = true;
 	private ServerSocket serverSocket;
 
 	public Server() throws IOException {
-		port = 7777;
-		flag = true;
+		
 		serverSocket = new ServerSocket(port);
 	}
 
 	// 소켓이 만들어지
 	public void startServer() throws Exception {
 		System.out.println("Server Start ...");
+		Socket socket = serverSocket.accept();
+		System.out.println("Server Connected...");
+		System.out.println(serverSocket.getInetAddress());
+		
+		Receiver receiver = new Receiver(socket);
+		receiver.start();
+		Sender sender = new Sender(socket);
+		
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("input MESSAGE ...");
-		String msg = br.readLine();
+		while(flag) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("input MESSAGE ...");
+			String msg = br.readLine();
 
-		if (msg.equals("q")) {
-			br.close();
+			Thread t = new Thread(sender);//sender는 서버가 입력 받은 stirng을 전송하는 역할을 한다
+			sender.setSendMsg(msg);
+			t.start();
+			if (msg.equals("q")) {
+				br.close();
+			}
 		}
-
 		System.out.println("Server Stop");
 	}
-
+	//Receiver는 계속 살아있고 sender는 데이터를 보내고자할 때만 생성된다. 즉, sender는 계속 죽고 계속 생성됨 
+	
+	//socket을 줬으니 inputstream을 만들어서 기다려라 -> 반복해서 읽는다
 	class Receiver extends Thread { // 들어올때까지 기다리고 읽는다.
 		private Socket socket;
 		private InputStream is = null;
 		private DataInputStream dis = null;
 
-		public Receiver() {
-		}
+		public Receiver() {}
 
 		public Receiver(Socket socket) throws IOException {
 			this.socket = socket;
@@ -67,6 +78,7 @@ public class Server {
 			while (dis != null) {
 				try {
 					String msg = dis.readUTF();
+					System.out.println(msg);
 					if (msg.equals("q")) {
 						break;
 					}
@@ -78,7 +90,7 @@ public class Server {
 				}
 			}
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1000); //잠깐 기다렸다가 소켓을 끊는다
 				socket.close();
 				System.exit(0);
 			} catch (Exception e) {

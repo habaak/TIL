@@ -1,4 +1,4 @@
-package tcp4;
+package tcp5;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -15,13 +15,14 @@ public class Client {
 	boolean flag = true; //client에서 계속 key in을 하기 위해서
 	boolean cflag = true;
 	/*String address = "192.168.0.39";*/
-	String address = "127.0.0.1";
+	//String address = "70.12.114.132";
+	String address = "203.246.196.46";
 	Socket socket;
 
 	public Client() throws UnknownHostException, IOException {
 		while(cflag) {	// 서버와 통신 될 때 까지 접속 시도 루프
 			try {
-				socket = new Socket(address, 7788);
+				socket = new Socket(address, 8888);
 				System.out.println("Connected Server...");
 				if(socket != null && socket.isConnected()) {
 					cflag = false ;
