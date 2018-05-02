@@ -1,4 +1,4 @@
-package tcp4;
+package day04;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -12,25 +12,17 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-<<<<<<< HEAD
-	boolean flag = true;
-	String address = "192.168.1.37";
-	Socket socket;
-
-	public Client() throws UnknownHostException, IOException {
-		socket = new Socket(address, 8888);
-		System.out.println("Connected Server ..");
-=======
 	boolean flag = true; //client¿¡¼­ °è¼Ó key inÀ» ÇÏ±â À§ÇØ¼­
 	boolean cflag = true;
 	/*String address = "192.168.0.39";*/
-	String address = "127.0.0.1";
+	//String address = "203.246.196.46";
+	String address = "70.12.114.132";
 	Socket socket;
 
 	public Client() throws UnknownHostException, IOException {
 		while(cflag) {	// ¼­¹ö¿Í Åë½Å µÉ ¶§ ±îÁö Á¢¼Ó ½Ãµµ ·çÇÁ
 			try {
-				socket = new Socket(address, 7788);
+				socket = new Socket(address, 8888);
 				System.out.println("Connected Server...");
 				if(socket != null && socket.isConnected()) {
 					cflag = false ;
@@ -45,10 +37,9 @@ public class Client {
 			}
 		}
 		
->>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
 	}
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// ¼ÒÄÏÀÌ ¸¸µé¾îÁö
 	public void startClient() throws Exception {
 		new Receiver(socket).start();
 		Sender sender = new Sender(socket);
@@ -82,14 +73,14 @@ public class Client {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			new Client().startClient();
+			new Client().startClient(); //°´Ã¼ »ý¼º ¹× ÇÁ·Î±×·¥ ½ÃÀÛ
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	class Receiver extends Thread { // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+	class Receiver extends Thread { // µé¾î¿Ã¶§±îÁö ±â´Ù¸®°í ÀÐ´Â´Ù.
 		Socket socket;
 		InputStream is;
 		DataInputStream dis;
@@ -109,7 +100,7 @@ public class Client {
 					String str = dis.readUTF();
 					System.out.println(str);
 					if (str.trim().equals("q")) {
-						//dis.close();
+						dis.close();
 						break;
 					}
 				} catch (Exception e) {
@@ -131,7 +122,7 @@ public class Client {
 	}
 }
 
-class Sender implements Runnable { // ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¸ï¿½ Senderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+class Sender implements Runnable { // ¹®ÀÚ¸¦ ÀÔ·ÂÇÏ¸é Sender°¡ ¸¸µé¾îÁö°í Àü¼Û
 
 	Socket socket;
 	OutputStream os;

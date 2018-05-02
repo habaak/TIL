@@ -13,39 +13,60 @@ import java.net.Socket;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 public class Server {
-
-	private int port;
-	private boolean flag;
+	private int port=7788;
+	private boolean flag = true;
 	private ServerSocket serverSocket;
 
 	public Server() throws IOException {
+<<<<<<< HEAD
 		port = 8888;
 		flag = true;
+=======
+		
+>>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
 		serverSocket = new ServerSocket(port);
 	}
 
 	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void startServer() throws Exception {
 		System.out.println("Server Start ...");
+		Socket socket = serverSocket.accept();
+		System.out.println("Server Connected...");
+		System.out.println(serverSocket.getInetAddress());
+		
+		Receiver receiver = new Receiver(socket);
+		receiver.start();
+		Sender sender = new Sender(socket);
+		
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("input MESSAGE ...");
-		String msg = br.readLine();
+		while(flag) {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("input MESSAGE ...");
+			String msg = br.readLine();
 
-		if (msg.equals("q")) {
-			br.close();
+			Thread t = new Thread(sender);//sender´Â ¼­¹ö°¡ ÀÔ·Â ¹ÞÀº stirngÀ» Àü¼ÛÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù
+			sender.setSendMsg(msg);
+			t.start();
+			if (msg.equals("q")) {
+				br.close();
+			}
 		}
-
 		System.out.println("Server Stop");
 	}
+<<<<<<< HEAD
 
 	class Receiver extends Thread { // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+=======
+	//Receiver´Â °è¼Ó »ì¾ÆÀÖ°í sender´Â µ¥ÀÌÅÍ¸¦ º¸³»°íÀÚÇÒ ¶§¸¸ »ý¼ºµÈ´Ù. Áï, sender´Â °è¼Ó Á×°í °è¼Ó »ý¼ºµÊ 
+	
+	//socketÀ» ÁáÀ¸´Ï inputstreamÀ» ¸¸µé¾î¼­ ±â´Ù·Á¶ó -> ¹Ýº¹ÇØ¼­ ÀÐ´Â´Ù
+	class Receiver extends Thread { // µé¾î¿Ã¶§±îÁö ±â´Ù¸®°í ÀÐ´Â´Ù.
+>>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
 		private Socket socket;
 		private InputStream is = null;
 		private DataInputStream dis = null;
 
-		public Receiver() {
-		}
+		public Receiver() {}
 
 		public Receiver(Socket socket) throws IOException {
 			this.socket = socket;
@@ -67,6 +88,7 @@ public class Server {
 			while (dis != null) {
 				try {
 					String msg = dis.readUTF();
+					System.out.println(msg);
 					if (msg.equals("q")) {
 						break;
 					}
@@ -78,7 +100,7 @@ public class Server {
 				}
 			}
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1000); //Àá±ñ ±â´Ù·È´Ù°¡ ¼ÒÄÏÀ» ²÷´Â´Ù
 				socket.close();
 				System.exit(0);
 			} catch (Exception e) {
