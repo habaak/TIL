@@ -19,12 +19,12 @@ public class Server {
 	private ServerSocket serverSocket;
 
 	public Server() throws IOException {
-		port = 7777;
+		port = 8888;
 		flag = true;
 		serverSocket = new ServerSocket(port);
 	}
 
-	// ¼ÒÄÏÀÌ ¸¸µé¾îÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void startServer() throws Exception {
 		System.out.println("Server Start ...");
 
@@ -39,7 +39,7 @@ public class Server {
 		System.out.println("Server Stop");
 	}
 
-	class Receiver extends Thread { // µé¾î¿Ã¶§±îÁö ±â´Ù¸®°í ÀÐ´Â´Ù.
+	class Receiver extends Thread { // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
 		private Socket socket;
 		private InputStream is = null;
 		private DataInputStream dis = null;
@@ -87,7 +87,7 @@ public class Server {
 		}
 	}
 
-	class Sender implements Runnable { // ¹®ÀÚ¸¦ ÀÔ·ÂÇÏ¸é Sender°¡ ¸¸µé¾îÁö°í Àü¼Û
+	class Sender implements Runnable { // ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï¸ï¿½ Senderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Socket socket;
 		OutputStream os;
 		DataOutputStream dos;

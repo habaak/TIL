@@ -14,15 +14,15 @@ public class Server {
 	Socket socket = null;
 	
 	public Server() throws IOException {
-		port = 7777;
-		serverSocket = new ServerSocket(port); // ÄÄÇ»ÅÍÀÇ Æ¯Á¤ Æ÷Æ®¿¡ Á¢¼ÓÇÏ¿© ¼­¹ö¿ªÇÒÀ» ÇÒ °ÍÀÌ´Ù. //´Ù¸¥ ÇÁ·Î±×·¥ÀÌ »ç¿ëÇÏ°í ÀÖÀ» ‹š´Â ¿¹¿Ü Ã³¸®
+		port = 9999;
+		serverSocket = new ServerSocket(port); // ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½. //ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	}
 	//Accept Client Socket
 	//Sender Thread Create(Send Socket) and Start
 	public void startServer() throws IOException {
 		
 		System.out.println("Start Server....");
-		while(flag) { //´©±º°¡°¡ µé¾î¿À±æ ±â´Ù¸²
+		while(flag) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½
 			Socket socket = null;
 			System.out.println("Ready Server....");
 			socket = serverSocket.accept();

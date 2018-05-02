@@ -90,7 +90,7 @@ public class Client {
 	public static void main(String[] args) {
 		Client client = null;
 		try {
-			client = new Client("70.12.114.133", 7777);
+			client = new Client("192.168.1.37", 7777);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

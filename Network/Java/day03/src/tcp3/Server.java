@@ -18,7 +18,7 @@ public class Server {
 	
 	
 	public Server() throws IOException {
-		port = 7777;
+		port = 8888;
 		flag = true;
 		serverSocket = new ServerSocket(port);
 	}
