@@ -12,9 +12,11 @@
 		infrastructure -->
 
 	<!-- HandlerMethodArgumentResolver를 상속받는 CustomMapArgumentResolver 등록 -->
-	<!-- <annotation-driven> <argument-resolvers> <beans:bean class="second.common.resolver.CustomMapArgumentResolver"></beans:bean> 
+	<!-- <annotation-driven> <argument-resolvers> <beans:bean class="second.sample.resolver.CustomMapArgumentResolver"></beans:bean> 
 		</argument-resolvers> </annotation-driven> -->
 	<annotation-driven />
+
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -27,9 +29,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<!-- <interceptors> <interceptor> <mapping path="/**" /> <beans:bean id="loggerInterceptor" 
-		class="second.common.logger.LoggerInterceptor"></beans:bean> </interceptor> 
-		</interceptors> -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**" />
+			<beans:bean id="loggerInterceptor"
+				class="second.sample.logger.LoggerInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	<context:component-scan base-package="second" />
 
 
