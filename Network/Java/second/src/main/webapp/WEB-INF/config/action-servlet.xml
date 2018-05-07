@@ -33,7 +33,7 @@
 		<interceptor>
 			<mapping path="/**" />
 			<beans:bean id="loggerInterceptor"
-				class="second.sample.logger.LoggerInterceptor"></beans:bean>
+				class="second.common.logger.LoggerInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
 	<context:component-scan base-package="second" />

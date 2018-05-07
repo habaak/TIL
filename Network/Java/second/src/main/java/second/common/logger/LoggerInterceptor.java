@@ -1,4 +1,4 @@
-package second.sample.logger;
+package second.common.logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
