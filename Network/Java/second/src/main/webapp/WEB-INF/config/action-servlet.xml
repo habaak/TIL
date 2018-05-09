@@ -12,9 +12,14 @@
 		infrastructure -->
 
 	<!-- HandlerMethodArgumentResolver를 상속받는 CustomMapArgumentResolver 등록 -->
-	<!-- <annotation-driven> <argument-resolvers> <beans:bean class="second.sample.resolver.CustomMapArgumentResolver"></beans:bean> 
-		</argument-resolvers> </annotation-driven> -->
-	<annotation-driven />
+	<annotation-driven>
+		<argument-resolvers>
+			<beans:bean	class="second.common.resolver.CustomMapArgumentResolver">
+			</beans:bean>
+		</argument-resolvers>
+	</annotation-driven>
+	
+	
 
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 

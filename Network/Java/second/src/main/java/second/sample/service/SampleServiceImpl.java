@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import second.sample.dao.SampleDAO;
  
-@Service("sampleService")
+@Service("SampleService")
 public class SampleServiceImpl implements SampleService{
     Logger log = Logger.getLogger(this.getClass());
      
@@ -18,6 +18,9 @@ public class SampleServiceImpl implements SampleService{
      
     @Override
     public List<Map<String, Object>> selectBoardList(Map<String, Object> map) throws Exception {
+    	
+    	
+    	log.debug("in service");
         return sampleDAO.selectBoardList(map);
     }
  
