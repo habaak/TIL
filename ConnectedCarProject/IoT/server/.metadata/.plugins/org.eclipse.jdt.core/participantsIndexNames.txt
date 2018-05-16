@@ -1,0 +1,5 @@
+INDEX VERSION 1.130
+C:\Users\habaa\Desktop\Project\IoT\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3516856666.index
+\erice\src\main\java
+C:\Users\habaa\Desktop\Project\IoT\server\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2548734678.index
+\erice\src\main\resources
