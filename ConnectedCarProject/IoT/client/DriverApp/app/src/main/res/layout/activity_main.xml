@@ -6,13 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.habaa.driverapp.MainActivity">
+    tools:context="com.erise.habaak.driverapp.MainActivity">
+    <fragment android:name="com.erise.habaak.driverapp.HomeFragment"
+        android:id="@+id/viewer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:orientation="horizontal">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +30,8 @@
                 android:id="@+id/temp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="온도" />
+                android:text="온도"
+                android:textSize="30dp" />
 
             <TextView
                 android:id="@+id/humi"
