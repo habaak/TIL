@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  
+    <ion-title align="center">
+      저 이번에 내려요
+    </ion-title>
+  
+    
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item-group>
+    <section>
+      <ion-item no-lines>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <ion-avatar>
+                <img src="assets/img/profiles/avatar-ts-buzz.png">
+              </ion-avatar>
+            </ion-col>
+            <ion-col col-9>
+              <b>곽지훈</b> 기사님
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </section>
+  </ion-item-group>
+  
+  <ion-item-group class="dashboard-group">
+    <ion-item-divider color="grey" no-lines>버스 정보</ion-item-divider>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <section item-height="match">
+            <ion-item>
+              속도
+            </ion-item>
+          </section>
+        </ion-col>
+        <ion-col>
+          <ion-row>
+            온도
+          </ion-row>
+          <ion-row>
+            습도
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <button type="button" color="light" ion-button full>지금 내 위치</button>
+    </ion-grid>
+  </ion-item-group>
+      
+ 
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          벨
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button full outline>내려요</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-6>
+            온도
+          </ion-col>
+          <ion-col col-3>
+              <button ion-button>추워요</button>
+          </ion-col>
+          <ion-col col-3>
+              <button ion-button color="danger">더워요</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-6>
+              속도
+            </ion-col>
+            <ion-col col-3>
+                <button ion-button>느려요</button>
+            </ion-col>
+            <ion-col col-3>
+                <button ion-button color="danger">빨라요</button>
+              </ion-col>
+          </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
