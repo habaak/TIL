@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 
 public class Client {
 
-<<<<<<< HEAD
+
 	boolean flag = true;
 	String address = "192.168.1.37";
 	Socket socket;
@@ -20,15 +20,15 @@ public class Client {
 	public Client() throws UnknownHostException, IOException {
 		socket = new Socket(address, 8888);
 		System.out.println("Connected Server ..");
-=======
-	boolean flag = true; //client¿¡¼­ °è¼Ó key inÀ» ÇÏ±â À§ÇØ¼­
+
+	boolean flag = true; //clientï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ key inï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
 	boolean cflag = true;
 	/*String address = "192.168.0.39";*/
 	String address = "127.0.0.1";
 	Socket socket;
 
 	public Client() throws UnknownHostException, IOException {
-		while(cflag) {	// ¼­¹ö¿Í Åë½Å µÉ ¶§ ±îÁö Á¢¼Ó ½Ãµµ ·çÇÁ
+		while(cflag) {	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½
 			try {
 				socket = new Socket(address, 7788);
 				System.out.println("Connected Server...");
@@ -45,7 +45,6 @@ public class Client {
 			}
 		}
 		
->>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
 	}
 
 	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
@@ -55,7 +54,7 @@ public class Client {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("input MESSAGE ...");
 
-		//client¿¡¼­ ÀÔ·Â ¹ÞÀº °ªÀ» °è¼ÓÇØ¼­ ¼­¹ö·Î Àü¼ÛÇÏ±â À§ÇØ
+		//clientï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
 		while (flag) {
 			System.out.println("input MESSAGE ...");
 			String msg = br.readLine();
@@ -66,15 +65,15 @@ public class Client {
 				t.start();
 				flag = false;
 				br.close();
-				break; //whileloop³¡
+				break; //whileloopï¿½ï¿½
 			}
-			//¼­¹ö¿¡°Ô Àü¼ÛÇÏ°íÀÚ ÇÏ´Â °ªÀ» ÀÔ·Â¹Þ°í ½º·¹µå¸¦ ÅëÇØ¼­ Àü¼Û
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹Þ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 			Thread t = new Thread(sender);
 			sender.setSendMsg(msg);
 			t.start();
 		}
 		Thread.sleep(1000);
-		socket.close(); //ÇÁ·Î±×·¥ Á¾·á
+		socket.close(); //ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½
 		System.out.println("Server Client");
 	}
 	

@@ -18,12 +18,9 @@ public class Server {
 	private ServerSocket serverSocket;
 
 	public Server() throws IOException {
-<<<<<<< HEAD
+
 		port = 8888;
 		flag = true;
-=======
-		
->>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
 		serverSocket = new ServerSocket(port);
 	}
 
@@ -44,7 +41,7 @@ public class Server {
 			System.out.println("input MESSAGE ...");
 			String msg = br.readLine();
 
-			Thread t = new Thread(sender);//sender´Â ¼­¹ö°¡ ÀÔ·Â ¹ÞÀº stirngÀ» Àü¼ÛÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù
+			Thread t = new Thread(sender);//senderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ stirngï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½
 			sender.setSendMsg(msg);
 			t.start();
 			if (msg.equals("q")) {
@@ -53,15 +50,15 @@ public class Server {
 		}
 		System.out.println("Server Stop");
 	}
-<<<<<<< HEAD
+
 
 	class Receiver extends Thread { // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
-=======
-	//Receiver´Â °è¼Ó »ì¾ÆÀÖ°í sender´Â µ¥ÀÌÅÍ¸¦ º¸³»°íÀÚÇÒ ¶§¸¸ »ý¼ºµÈ´Ù. Áï, sender´Â °è¼Ó Á×°í °è¼Ó »ý¼ºµÊ 
+
+	//Receiverï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ senderï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½. ï¿½ï¿½, senderï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½×°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	
-	//socketÀ» ÁáÀ¸´Ï inputstreamÀ» ¸¸µé¾î¼­ ±â´Ù·Á¶ó -> ¹Ýº¹ÇØ¼­ ÀÐ´Â´Ù
-	class Receiver extends Thread { // µé¾î¿Ã¶§±îÁö ±â´Ù¸®°í ÀÐ´Â´Ù.
->>>>>>> f33626d251efb1611463ab0dbd54729d6effda11
+	//socketï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ inputstreamï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½Ù·ï¿½ï¿½ï¿½ -> ï¿½Ýºï¿½ï¿½Ø¼ï¿½ ï¿½Ð´Â´ï¿½
+	class Receiver extends Thread { // ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ð´Â´ï¿½.
+
 		private Socket socket;
 		private InputStream is = null;
 		private DataInputStream dis = null;
@@ -100,7 +97,7 @@ public class Server {
 				}
 			}
 			try {
-				Thread.sleep(1000); //Àá±ñ ±â´Ù·È´Ù°¡ ¼ÒÄÏÀ» ²÷´Â´Ù
+				Thread.sleep(1000); //ï¿½ï¿½ï¿½ ï¿½ï¿½Ù·È´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½
 				socket.close();
 				System.exit(0);
 			} catch (Exception e) {
