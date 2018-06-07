@@ -126,6 +126,7 @@ divide(4,2)
 => 2
 ```
 
+- 기본 매개변수
 ```Ruby
 def factorial(n)
    n == 0 ?1 : n*factorial(n-1)
@@ -133,4 +134,90 @@ end
 => :factorial
 factorial(3)
 => 6
+factorial
+#ArgumentError: wrong number of arguments (given 0, expected 1)
+
+def factorial_d(n=5) #기본 매개변수 설정
+   n == 0 ?1 : n*factorial_d(n-1)
+end
+factorial_d
+=> 120
+
 ```
+
+ [Ruby Docs] http://ruby-doc.org/core-2.3.3/
+
+### 6. Block
+```Ruby
+3.times { puts "hello" }
+
+3.times do |i|
+  puts i #이 부분이 block 입니다.
+end  
+0
+1
+2
+=> 3
+```
+```Ruby
+def hihi
+  return "No block" unless block_given?
+  yield
+end  
+=> :hihi
+
+hihi {puts "hihi"}
+hihi
+
+hihi #블록이 없으므로 No block을 return한다
+=> "No block"
+```
+
+### 7. Ruby Files
+
+### 8. Ruby Single quate & Double quate
+```Ruby
+a = "Hello:)\n i'm Park"                                      
+=> "Hello:)\n i'm Park"
+
+b = 'Hello:)\n i am Park'        
+=> "Hello:)\\n i am Park"
+a = "#{name}님 안녕하세요"
+=> habaak님 안녕하세요"
+a = '#{name}님 안녕하세요'               
+=> "\#{name}님 안녕하세요"
+```
+
+```Ruby
+my_name = "Park Junha"
+=> "Park Junha"
+my_name.upcase
+=> "PARK JUNHA"
+my_name.upcase! # 객체 자신이 바뀐다
+=> "PARK JUNHA"
+my_name
+=> "PARK JUNHA"
+```
+
+### 9. Symbol
+- Symbol은 문자열은 아니다.
+- Symbol은
+
+### 10. Ruby Hash
+- key와 value로 이루어진 DataType
+
+- 생성 `hash.new()`, `hash = {}`
+- 호출 `hash[key값]`
+```Ruby
+hash1 = { :key => value }
+hash2 = { key : value }
+hash3 = { "key" => value }
+#모두 똑같다
+```
+- each 반복
+```Ruby
+hash.each do |k, v|
+  puts "#{k} : #{v}"
+end
+```
+[알아두면 도움이 되는 55가지 루비 기법] https://gist.github.com/nacyot/7624036
