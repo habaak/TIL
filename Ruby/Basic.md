@@ -125,3 +125,12 @@ divide(4,0)
 divide(4,2)
 => 2
 ```
+
+```Ruby
+def factorial(n)
+   n == 0 ?1 : n*factorial(n-1)
+end  
+=> :factorial
+factorial(3)
+=> 6
+```
