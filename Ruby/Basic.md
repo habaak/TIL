@@ -209,8 +209,8 @@ my_name
 - 생성 `hash.new()`, `hash = {}`
 - 호출 `hash[key값]`
 ```Ruby
-hash1 = { :key => value }
-hash2 = { key : value }
+hash1 = { :key => value } #콜론이 띄어져있으면 다른 구문이다
+hash2 = { key: value } #콜론이 띄어져있으면 다른 구문이다
 hash3 = { "key" => value }
 #모두 똑같다
 ```
