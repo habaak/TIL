@@ -16,6 +16,7 @@ end
 ```
 - 실행
 `ruby app.rb -o $IP`
+외부 접속을 허용하기 위해서 IP를 바꿔주었습니다.
 
 - Sinatra reloader
 `gem install sinatra-contrib`
