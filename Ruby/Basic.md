@@ -201,7 +201,9 @@ my_name
 
 ### 9. Symbol
 - Symbol은 문자열은 아니다.
-- Symbol은
+```Ruby
+
+```
 
 ### 10. Ruby Hash
 - key와 value로 이루어진 DataType

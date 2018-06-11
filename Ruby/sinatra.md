@@ -90,7 +90,38 @@ get '/lunch-hash' do
 end
 
 ```
+### 2. 시작 페이지 만들기 (Routing 설정 및 view 설정)
+##### 폴더 구조
 
+* app.rb
+* views/
+  * .erb
+  * layout.erb
+
+##### layout.erb
+
+```erb
+<html>
+    <head>
+    </head>
+    <body>
+        <%= yield %>
+    </body>
+</html>
+```
+
+```ruby
+def hello
+    puts "hello"
+    yield
+    puts "bye"
+end
+# {} : block / 코드 덩어리
+hello {puts "takhee"}
+# => hello takhee bye
+```
+##### erb에서 Ruby코드 활용하기
+`<%= @변수명 %>`
 lunchfile.erbfile
 ```html
 <h1>오늘의 추천 메뉴는?</h1>
@@ -105,3 +136,122 @@ lunchfile.erbfile
 <h3><%= @menu %>입니다!!!</h3>
 <img src="<%= @img %>" height="600px" weight="400px">
 ```
+
+##### params
+
+1. variable routing
+```Ruby
+# app.rb
+get 'hello':name do
+  @name = params[:name]
+  erb :name
+end
+```
+2. `form` tag를 통해서 받는 법
+```html
+<form action="/posts/create">
+  제목 : <input name="title"></input>
+</form>
+```
+```Ruby
+# app.rb
+# params
+# {title: "title"}
+get '/posts/create' do
+  @title = params[:title]
+end
+
+
+### 3. ORM
+
+```
+##### Object Relational Mapper - 객체 관계 매핑
+객체지향언어(ruby)와 데이터베이스(sqlite)를 연결하는 것을 도와주는 도구
+
+[Datamapper]('http://recipes.sinatrarb.com/p/models/data_mapper')
+`$ gem install datamapper`
+`$ gem install dm-sqlite-adapter`
+
+```Ruby
+# C9에서 json 라이브러리
+gem 'json','~> 1.6'
+
+require 'sinatra'
+require 'sinatra/reloader'
+require 'data_mapper' # metagem, requires common plugins too.
+
+# need install dm-sqlite-adapter
+# blog.db 세팅
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/blog.db")
+# Post 객체(Object) 생성
+class Post
+  include DataMapper::Resource
+  property :id, Serial
+  property :title, String
+  property :body, Text
+  property :created_at, DateTime
+end
+
+# Perform basic sanity checks and initialize all relationships
+# Call this when you've defined all your models
+DataMapper.finalize
+
+# automatically create the post table
+Post.auto_upgrade!
+
+```
+
+### 4. 데이터 조작
+- 기본
+`Post.all`
+- Create
+  ```Ruby
+  # 1.
+  Post.create(title:"test", body:"body")
+  # 2.
+  p = Post.new
+  p.title = "test"
+  p.body = "test"
+  p.save #db에 저장
+  ```
+- Read
+  ```Ruby
+  Post.get(1) #get(id)
+  ```
+- Update
+  ```Ruby
+  # 1.
+  Post.get(1).update(title:"test",body:"body")
+  # 2.
+  p = Post.get(1)
+  p.title = "test"
+  p.body = "test"
+  p.save #db에 저장
+  ```
+- Destory
+  ```Ruby
+  Post.get(1).destory
+  ```
+
+  ### 5. CRUD 만들기
+
+  Create : action이 두개 필요
+
+  ```ruby
+  # 사용자에게 입력받는 창
+  get '/posts/new' do
+  end
+  # 실제로 db에 저장하는 곳
+  get 'posts/create' do
+      Post.create(title: params[:title], body: params[:body])
+  end
+  ```
+
+  Read : variable routing
+
+  ```ruby
+  # app.rb
+  get 'posts/:id' do
+  	@post = Post.get(params[:id])
+  end
+  ```
