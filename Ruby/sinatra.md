@@ -1,25 +1,26 @@
 # Sinatra
 ### 0.Install
-`mkdir sinatra-test`
-`cd sinatra-test`
-`touch app.rb`
-`gem install sinatra`
+- `$ mkdir sinatra-test`
+- `$ cd sinatra-test`
+- `$ touch app.rb`
+- `$ gem install sinatra`
 
+### 1. 시작 페이지 만들기
 app.js
 ```Ruby
 #app.rb
 require 'sinatra'
 
 get '/' do
-  'Hello world!'
+  send_file 'index.html' #index.html 파일을 보내줘
 end
 ```
-- 실행
-`ruby app.rb -o $IP`
+- 서버 실행
+`$ ruby app.rb -o $IP`
 외부 접속을 허용하기 위해서 IP를 바꿔주었습니다.
 
-- Sinatra reloader
-`gem install sinatra-contrib`
+- Sinatra reloader - 자동 서버 재시작
+`$ gem install sinatra-contrib`
 
 ```Ruby
 require 'sinatra'
