@@ -204,7 +204,7 @@ Post.auto_upgrade!
 ### 4. 데이터 조작
 - 기본
 `Post.all`
-- Create
+> Create
   ```Ruby
   # 1.
   Post.create(title:"test", body:"body")
@@ -214,11 +214,11 @@ Post.auto_upgrade!
   p.body = "test"
   p.save #db에 저장
   ```
-- Read
+> Read
   ```Ruby
   Post.get(1) #get(id)
   ```
-- Update
+> Update
   ```Ruby
   # 1.
   Post.get(1).update(title:"test",body:"body")
@@ -228,14 +228,14 @@ Post.auto_upgrade!
   p.body = "test"
   p.save #db에 저장
   ```
-- Destory
+> Destory
   ```Ruby
   Post.get(1).destory
   ```
 
-  ### 5. CRUD 만들기
+### 5. CRUD 만들기
 
-  Create : action이 두개 필요
+>  Create : action이 두개 필요
 
   ```ruby
   # 사용자에게 입력받는 창
@@ -247,7 +247,7 @@ Post.auto_upgrade!
   end
   ```
 
-  Read : variable routing
+>  Read : variable routing
 
   ```ruby
   # app.rb
