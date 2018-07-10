@@ -1,11 +1,11 @@
-#Ruby
-###2시간 동안 맛보는 챗봇
+# Ruby
+### 2시간 동안 맛보는 챗봇
 
-###문법
+### 문법
 Ruby는 모든 것이 객체
 
-####1. 저장
-######DataType
+#### 1. 저장
+###### DataType
  1. numeric
  2. string
  3. boolean
@@ -28,14 +28,14 @@ dust = {"영등포구"=>58, "강남구"=> 40}
 puts dust["영등포구"]
 ```
 
-####2.조건
+#### 2.조건
 end로 마무리
 괄호가 없어도 된다.
 ```Ruby
 if
 ```
 
-####3. 반복
+#### 3. 반복
 
 ```Ruby
 3.time.do
@@ -57,9 +57,9 @@ end
 end
 ```
 ---
-###예제 - 멋쟁이 사자처럼 쳇봇
+### 예제 - 멋쟁이 사자처럼 쳇봇
 
-#####미세먼지 - api 사용과 조건문, 타입 변경
+##### 미세먼지 - api 사용과 조건문, 타입 변경
 ```Ruby
 require 'httparty'
 url = URI.encode("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=강남구&dataTerm=MONTH&numOfRows=100&ServiceKey=")+key
@@ -80,7 +80,7 @@ if(dust < "30")
   puts "매우나쁨"
 end
 ```
-#####로또 - method 사용 하기
+##### 로또 - method 사용 하기
 ```Ruby
 # 1-45 숫자 저장
 # sample을 통해 6개 숫자를 무작위로 뽑는다
@@ -90,7 +90,7 @@ lotto = (1...45)
 .sort.to_s
 puts lotto
 ```
-#####코스피 - Nokogiri로 HTML 정보 추출
+##### 코스피 - Nokogiri로 HTML 정보 추출
 ```Ruby
 require 'httparty'
 require 'nokogiri'
